@@ -1,0 +1,76 @@
+<div id="chart" style="width: 45%;">
+  <iframe src="/filmy.html" name="chart_frame" scrolling="no" frameborder="0" width="100%" height="600">
+  </iframe>
+</div>
+
+<div id="number_table" style="clear: none;">
+
+<input type="hidden" name="auth_token" value="<%= form_authenticity_token() %>" />
+<input type="hidden" name="current_movie_name" value="<%= @analytics.first.movie_name %>" />
+
+<table class="analytics">
+  <tr>
+
+    <% unless current_facebook_user.nil? %>
+    <th>Seen?</th>
+    <% end %>
+
+    <th>Movie Name</th>
+    <th>Market value</th>
+
+    <% unless current_facebook_user.nil? %>
+    <th>Watchable?</th>
+    <% end %>
+
+    <!-- <th>Watchable twice?</th>
+    <th>Watchable many times?</th> -->
+
+  </tr>
+
+  <%- @analytics.each do |analytic| -%>
+  <tr>
+
+    <% unless current_facebook_user.nil? %>
+    <td>
+      <%= check_box_tag(
+	  "seen_#{analytic.movie_id}", analytic.movie_id,
+	  @analytics.seen?(analytic.movie_id), :class => 'seen'
+      ) %>
+      <img src="/images/loading.gif" id="seen_wait_state_<%=analytic.movie_id%>" class="wait_state" />
+    </td>
+    <% end %>
+
+    <td><a href="#" movie_id="<%= analytic.movie_id %>" class="load_chart"><%= analytic.movie_name %></a></td>
+    <td><%= analytic.show_percent %></td>
+
+    <% unless current_facebook_user.nil? %>
+    <td>
+      <%= check_box_tag(
+	  "watchable_#{analytic.movie_id}", analytic.movie_id,
+	  @analytics.watchable?(analytic.movie_id), :class => 'watchable'
+      ) %>
+      <img src="/images/loading.gif" id="watchable_wait_state_<%=analytic.movie_id%>" class="wait_state" />
+    </td>
+    <% end %>
+
+    <!--<td>
+      <%= check_box_tag(
+	  "watchable_twice_#{analytic.movie_id}", analytic.movie_id,
+	  @analytics.watchable_twice?(analytic.movie_id), :class => 'watchable_twice'
+      ) %>
+      <img src="/images/loading.gif" id="watchable_twice_wait_state_<%=analytic.movie_id%>" class="wait_state" />
+    </td>
+
+    <td>
+      <%= check_box_tag(
+	  "watchable_multi_#{analytic.movie_id}", analytic.movie_id,
+	  @analytics.watchable_multi?(analytic.movie_id), :class => 'watchable_multi'
+      ) %>
+      <img src="/images/loading.gif" id="watchable_multi_wait_state_<%=analytic.movie_id%>" class="wait_state" />
+    </td> -->
+
+  </tr>
+  <%- end -%>
+</table>
+
+</div>

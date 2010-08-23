@@ -1,0 +1,35 @@
+<% form_remote_for @user_session, :url => user_session_path do |f| %>
+
+  <div>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+    <%- unless @user_session.errors.on(:email).nil? -%>
+    <span class='error'><%= display_errors(@user_session.errors.on(:email)) %></span>
+    <%- end -%>
+  </div>
+
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+    <%- unless @user_session.errors.on(:password).nil? -%>
+    <span class='error'><%= display_errors(@user_session.errors.on(:password)) %></span>
+    <%- end -%>
+  </div>
+
+  <div>
+    <%= f.check_box :remember_me %><%= f.label :remember_me %>
+  </div>
+
+  <div>
+    <%= f.submit "Login" %>
+    <%- unless @user_session.errors.on(:base).nil? -%>
+    <span class="error"><%= display_errors(@user_session.errors.on(:base)) %></span>
+    <%- end -%>
+  </div>
+
+  <div>
+    Don't have a account with us yet?
+    No problem, <a href="#" class="register">create</a> an account now in one simple step!
+  </div>
+
+<% end %>

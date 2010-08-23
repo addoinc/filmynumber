@@ -1,0 +1,11 @@
+development:
+  adapter: mysql
+  database: filmy_dev
+  username: filmy
+  password: letmein
+
+test:
+  adapter: mysql
+  database: filmy_test
+  username: filmy
+  password: letmein

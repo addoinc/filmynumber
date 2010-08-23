@@ -1,0 +1,4 @@
+csv << ["Date","#{@numbers.first.movie_name}"]
+@numbers.each do |number|
+csv << ["#{number.run_date.strftime('%m/%d/%y')}", "#{number.show_percent}"]
+end

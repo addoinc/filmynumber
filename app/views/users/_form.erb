@@ -1,0 +1,32 @@
+<div>
+  <%= form.label :email %>
+  <%= form.text_field :email %>
+  <%- unless @user.errors.on(:email).nil? -%>
+  <span class='error'><%= display_errors(@user.errors.on(:email)) %></span>
+  <%- end -%>
+</div>
+
+<div>
+  <%= form.label "Display Name" %>
+  <%= form.text_field :login %>
+  <%- unless @user.errors.on(:login).nil? -%>
+  <span class='error'><%= display_errors(@user.errors.on(:login)) %></span>
+  <%- end -%>
+</div>
+
+
+<div>
+<%= form.label :password, form.object.new_record? ? nil : "Change password" %>
+<%= form.password_field :password %>
+<%- unless @user.errors.on(:password).nil? -%>
+<span class='error'><%= display_errors(@user.errors.on(:password)) %></span>
+<%- end -%>
+</div>
+
+<div>
+<%= form.label :password_confirmation %>
+<%= form.password_field :password_confirmation %>
+<%- unless @user.errors.on(:password_confirmation).nil? -%>
+<span class='error'><%= display_errors(@user.errors.on(:password_confirmation)) %></span>
+<%- end -%>
+</div>

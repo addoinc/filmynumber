@@ -1,0 +1,6 @@
+<%- if current_user.nil? -%>
+  <a href="#" class="login">Sign In</a> / <a href="#" class="register">Sign Up</a>
+<%- else -%>
+  <%= link_to(current_user.email, edit_account_url, :class => 'profile') %> /
+  <%= link_to("Sign Out", user_session_path, :method => :delete) %>
+<%- end -%>
