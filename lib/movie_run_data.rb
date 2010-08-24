@@ -6,13 +6,13 @@ class MovieRunData
     page_1 = Nokogiri::HTML(open('http://www.google.co.in/movies?near=hyderabad&hl=en&sort=1'))
     page_2 = Nokogiri::HTML(open('http://www.google.co.in/movies?near=hyderabad&hl=en&sort=1&start=10'))
     @pages = [page_1, page_2]
+    @pages = [page_1]
   end
   
   def populate
     @pages.each do |page|
       page.search('div[@class="movie_results"]/div[@class="movie"]').each do |movie|
-        # print movie name
-        movie_name = movie.search('div[@class="header"]/div[@class="desc"]/h2/a/span').first.content
+        movie_name = movie.search('div[@class="header"]/div[@class="desc"]/h2/a').first.content
         @movie_record = Movie.find_or_create_by_name(movie_name)
       
         # populate movie run data
@@ -38,7 +38,7 @@ class MovieRunData
   end
   
   def show_theater_name_times(theater)
-    theater_name = theater.search('div[@id]/div[@class="name"]/a/span').first.content
+    theater_name = theater.search('div[@id]/div[@class="name"]/a').first.content
     @theater_record = Theater.find_or_create_by_name(theater_name)
     
     show_times_str = theater.search('div[@class="times"]').first.content

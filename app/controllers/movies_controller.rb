@@ -5,7 +5,7 @@ class MoviesController < ApplicationController
       :all,
       :include => :movie,
       :conditions => [
-        "run_date > ? and run_date < ?", Date.today + params[:day].to_i, (Date.today + params[:day].to_i)+1
+        "run_date > ? and run_date < ?", Date.today + params[:day].to_i, (Date.today + params[:day].to_i)+2
       ],
       :order => "show_percent desc"
     )
